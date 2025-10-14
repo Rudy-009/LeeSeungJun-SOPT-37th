@@ -29,6 +29,9 @@ final class HomeViewController: UIViewController {
     
     private var calendar: UICalendarView = {
         let calendar = UICalendarView(frame: CGRect(x: 20, y: 400, width: 335, height: 300))
+        calendar.fontDesign = .serif
+        calendar.wantsDateDecorations = true
+        calendar.availableDateRange = Calendar.current.dateInterval(of: .month, for: Date())!
         return calendar
     }()
     
