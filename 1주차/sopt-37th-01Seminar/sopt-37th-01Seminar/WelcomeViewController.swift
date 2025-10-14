@@ -22,7 +22,6 @@ final class WelcomeViewController: UIViewController {
         let label = UILabel(frame: CGRect(x: 110, y: 295, width: 150, height: 60))
         label.text = "???님 \n반가워요!"
         label.font = UIFont(name: "Pretendard-ExtraBold", size: 25)
-        label.textColor = .white
         label.textAlignment = .center
         label.numberOfLines = 2
         return label
@@ -52,7 +51,8 @@ final class WelcomeViewController: UIViewController {
         let slider = UISlider(frame: CGRect(x: 20, y: 350, width: 335, height: 30))
         slider.minimumValue = 0
         slider.maximumValue = 100
-        slider.tintColor = UIColor.blue
+        slider.tintColor = .danggeunTheme
+        slider.value = 50
        return slider
     }()
     
@@ -62,7 +62,6 @@ final class WelcomeViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.view.backgroundColor = .black
         setLayout()
         bindID()
         print("\(num) 🍊 \(#function)")

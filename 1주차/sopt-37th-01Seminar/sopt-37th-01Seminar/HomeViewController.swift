@@ -42,7 +42,6 @@ final class HomeViewController: UIViewController {
         button.setTitle("로그인하기", for: .normal)
         button.setTitleColor(UIColor(red: 172/255, green: 176/255, blue: 185/255, alpha: 1), for: .normal)
         button.titleLabel?.font = UIFont(name: "Pretendard-Bold", size: 18)
-        button.addTarget(WelcomeViewController.self, action: #selector(backToLoginButtonDidTap), for: .touchUpInside)
         return button
     }()
     
@@ -77,14 +76,6 @@ final class HomeViewController: UIViewController {
         print("\(num) 🍇 \(#function)")
     }
     
-    @objc
-    private func backToLoginButtonDidTap() {
-        if self.navigationController == nil {
-            self.dismiss(animated: true)
-        } else {
-            self.navigationController?.popViewController(animated: true)
-        }
-    }
     
     private func setLayout() {
         [logoImageView, welcomeLabel, goHomeButton, backToLoginButton].forEach {
