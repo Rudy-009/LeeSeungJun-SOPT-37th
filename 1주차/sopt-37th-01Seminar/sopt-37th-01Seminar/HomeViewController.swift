@@ -14,7 +14,7 @@ final class HomeViewController: UIViewController {
     
     private let logoImageView: UIImageView = {
         let imageView = UIImageView(frame: CGRect(x: 112, y: 87, width: 150, height: 150))
-        imageView.image = UIImage(named: "logo2")
+        imageView.image = UIImage(named: "logo1")
         return imageView
     }()
     
