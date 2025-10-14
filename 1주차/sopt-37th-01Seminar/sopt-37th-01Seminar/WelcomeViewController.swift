@@ -19,9 +19,10 @@ final class WelcomeViewController: UIViewController {
     }()
     
     private let welcomeLabel: UILabel = {
-        let label = UILabel(frame: CGRect(x: 140, y: 295, width: 95, height: 60))
+        let label = UILabel(frame: CGRect(x: 110, y: 295, width: 150, height: 60))
         label.text = "???님 \n반가워요!"
         label.font = UIFont(name: "Pretendard-ExtraBold", size: 25)
+        label.textColor = .white
         label.textAlignment = .center
         label.numberOfLines = 2
         return label
@@ -53,7 +54,7 @@ final class WelcomeViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.view.backgroundColor = .white
+        self.view.backgroundColor = .black
         setLayout()
         bindID()
         print("\(num) 🍊 \(#function)")
@@ -104,7 +105,7 @@ final class WelcomeViewController: UIViewController {
         if let name = name, name != "" {
             self.welcomeLabel.text = "\(name) 님 \n반가워요!"
         } else {
-            self.welcomeLabel.text = "🖤 환영합니다!"
+            self.welcomeLabel.text = "\(num) 환영합니다!"
         }
     }
 }

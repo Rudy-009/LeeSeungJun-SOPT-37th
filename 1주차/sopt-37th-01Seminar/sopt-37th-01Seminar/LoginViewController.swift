@@ -29,7 +29,7 @@ class LoginViewController: UIViewController {
         let label = UILabel(frame: CGRect(x: 70, y: 163, width: self.view.bounds.width - 139, height: 50))
         label.text = "동네라서 가능한 모든 것\n 당근에서 가까운 이웃과 함께해요."
         label.textColor = .text
-        label.font = UIFont.boldSystemFont(ofSize: 18)
+        label.font = UIFont(name: "Pretendard-Bold", size: 20) // UIFont.boldSystemFont(ofSize: 18)
         label.textAlignment = .center
         label.numberOfLines = 2
         return label
