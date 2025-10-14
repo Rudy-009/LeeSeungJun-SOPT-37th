@@ -48,6 +48,14 @@ final class WelcomeViewController: UIViewController {
         return button
     }()
     
+    private var slider: UISlider = {
+        let slider = UISlider(frame: CGRect(x: 20, y: 350, width: 335, height: 30))
+        slider.minimumValue = 0
+        slider.maximumValue = 100
+        slider.tintColor = UIColor.blue
+       return slider
+    }()
+    
     override func loadView() { super.loadView()
         print("\(num) 🍎 \(#function)")
     }
@@ -96,7 +104,7 @@ final class WelcomeViewController: UIViewController {
     }
     
     private func setLayout() {
-        [logoImageView, welcomeLabel, goHomeButton, backToLoginButton].forEach {
+        [logoImageView, welcomeLabel, goHomeButton, backToLoginButton, slider].forEach {
             self.view.addSubview($0)
         }
     }
