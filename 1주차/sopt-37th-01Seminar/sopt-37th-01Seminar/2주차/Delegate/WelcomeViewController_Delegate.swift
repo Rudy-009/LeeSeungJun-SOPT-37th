@@ -7,10 +7,18 @@
 
 import UIKit
 
-final class WelcomeViewController: UIViewController {
+protocol WelcomeReloginDelegate: AnyObject {
+    func retryLogin(_ viewController: UIViewController, didTapReloginWith message: String)
+}
+final class WelcomeViewController_Delegate: UIViewController {
     
+    var id: String? = nil
     var name: String? = nil
     let num: String = "🖤"
+    // String을 갖고 어떠한 행동에 담기 위해 클로저를 생성
+    var completionHandler: ((String) -> Void)?
+    
+    weak var delegate: WelcomeReloginDelegate?
     
     private let logoImageView: UIImageView = {
         let imageView = UIImageView(frame: CGRect(x: 112, y: 87, width: 150, height: 150))
@@ -19,7 +27,7 @@ final class WelcomeViewController: UIViewController {
     }()
     
     private let welcomeLabel: UILabel = {
-        let label = UILabel(frame: CGRect(x: 140, y: 295, width: 95, height: 60))
+        let label = UILabel(frame: CGRect(x: 110, y: 295, width: 150, height: 60))
         label.text = "???님 \n반가워요!"
         label.font = UIFont(name: "Pretendard-ExtraBold", size: 25)
         label.textAlignment = .center
@@ -33,7 +41,6 @@ final class WelcomeViewController: UIViewController {
         button.setTitle("메인으로", for: .normal)
         button.setTitleColor(.white, for: .normal)
         button.titleLabel?.font = UIFont(name: "Pretendard-Bold", size: 18)
-        button.addTarget(self, action: #selector(goHomeButtonDidTap), for: .touchUpInside)
         return button
     }()
     
@@ -43,8 +50,17 @@ final class WelcomeViewController: UIViewController {
         button.setTitle("로그인하기", for: .normal)
         button.setTitleColor(UIColor(red: 172/255, green: 176/255, blue: 185/255, alpha: 1), for: .normal)
         button.titleLabel?.font = UIFont(name: "Pretendard-Bold", size: 18)
-        button.addTarget(WelcomeViewController.self, action: #selector(backToLoginButtonDidTap), for: .touchUpInside)
+        button.addTarget(WelcomeViewController_Delegate.self, action: #selector(backToLoginButtonDidTap), for: .touchUpInside)
         return button
+    }()
+    
+    private var slider: UISlider = {
+        let slider = UISlider(frame: CGRect(x: 20, y: 350, width: 335, height: 30))
+        slider.minimumValue = 0
+        slider.maximumValue = 100
+        slider.tintColor = .danggeunTheme
+        slider.value = 50
+       return slider
     }()
     
     override func loadView() { super.loadView()
@@ -53,7 +69,6 @@ final class WelcomeViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.view.backgroundColor = .white
         setLayout()
         bindID()
         print("\(num) 🍊 \(#function)")
@@ -78,24 +93,9 @@ final class WelcomeViewController: UIViewController {
     deinit {
         print("\(num) 🍇 \(#function)")
     }
-    
-    @objc
-    private func goHomeButtonDidTap() {
-        let homeViewController = HomeViewController()
-        self.navigationController?.pushViewController(homeViewController, animated: true)
-    }
-    
-    @objc
-    private func backToLoginButtonDidTap() {
-        if self.navigationController == nil {
-            self.dismiss(animated: true)
-        } else {
-            self.navigationController?.popViewController(animated: true)
-        }
-    }
-    
+        
     private func setLayout() {
-        [logoImageView, welcomeLabel, goHomeButton, backToLoginButton].forEach {
+        [logoImageView, welcomeLabel, goHomeButton, backToLoginButton, slider].forEach {
             self.view.addSubview($0)
         }
     }
@@ -104,11 +104,22 @@ final class WelcomeViewController: UIViewController {
         if let name = name, name != "" {
             self.welcomeLabel.text = "\(name) 님 \n반가워요!"
         } else {
-            self.welcomeLabel.text = "🖤 환영합니다!"
+            self.welcomeLabel.text = "\(num) 환영합니다!"
+        }
+    }
+    
+    @objc
+    private func backToLoginButtonDidTap() {
+        delegate?.retryLogin(self, didTapReloginWith: "다시 로그인 버튼을 눌렀어요!")
+        
+        if self.navigationController == nil {
+            self.dismiss(animated: true)
+        } else {
+            self.navigationController?.popViewController(animated: true)
         }
     }
 }
 
 #Preview {
-    WelcomeViewController()
+    WelcomeViewController_Delegate()
 }
